@@ -1,0 +1,25 @@
+<nav>
+  <img id="logo" alt="logo" />
+  <div id="nav-links">
+    <a routerLink="/">Főoldal</a>
+    <a routerLink="/about">About</a>
+    <a routerLink="/contact">Contact</a>
+    <a
+      routerLink="/blog"
+      matTooltip="(Ez egy készülőben lévő utazás szervező PWA projektem, ami még nincs hostolva.)"
+      >Te is utaznál?
+      <mat-icon style="height: 0.9rem; font-size: smaller"
+        >open_in_new</mat-icon
+      ></a
+    >
+  </div>
+  <div id="side-actions">
+    <div id="auth-links">
+      <a routerLink="/signin" mat-raised-button>Sign In</a>
+      <a routerLink="/signup" mat-flat-button>Sign Up</a>
+    </div>
+    <button id="drawer-btn" mat-icon-button (click)="toggleDrawer()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+</nav>

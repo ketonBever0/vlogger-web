@@ -1,0 +1,35 @@
+<form [formGroup]="loginForm" (submit)="onSubmit()">
+  <h1>Login</h1>
+  <div class="mat-input">
+    <mat-form-field>
+      <mat-label for="email">E-mail address</mat-label>
+      <input matInput type="email" id="email" formControlName="email" />
+    </mat-form-field>
+  </div>
+  <mat-error *ngIf="loginForm.get('email')!.hasError('required')">
+    E-mail is required
+  </mat-error>
+  <div class="mat-input">
+    <mat-form-field>
+      <mat-label for="password">Password</mat-label>
+      <input
+        matInput
+        type="password"
+        id="password"
+        formControlName="password"
+      />
+    </mat-form-field>
+  </div>
+  <mat-error *ngIf="loginForm.get('password')!.hasError('required')">
+    Password is required
+  </mat-error>
+
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="!loginForm.valid"
+  >
+    Login
+  </button>
+</form>

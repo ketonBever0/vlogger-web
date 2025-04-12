@@ -1,0 +1,16 @@
+<div *ngIf="isAppLoading" id="loading-screen">
+  <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
+</div>
+<app-navbar (toggleDrawerEvent)="onToggleDrawer()" />
+<mat-drawer-container hasBackdrop="true">
+  <mat-drawer #drawer mode="over" position="end">
+    <div id="drawer">asd</div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <main id="main">
+      <div id="container">
+        <router-outlet />
+      </div>
+    </main>
+  </mat-drawer-content>
+</mat-drawer-container>
