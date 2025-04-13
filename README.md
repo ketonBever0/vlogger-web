@@ -43,9 +43,9 @@ Már működik a regisztráció és bejelentkezés. Egyik fiók e-mail címe: <t
 
 - Ikonok a navigációs sávon:
 
-- Ajánlólink mellett (középen utolsó)
+  - Ajánlólink mellett (középen utolsó)
 
-- Mobilnézet esetén a drawer kapcsoló
+  - Mobilnézet esetén a drawer kapcsoló
 
 - Tooltip az említett ajánlólinken, ha ráviszed az egeret
 
