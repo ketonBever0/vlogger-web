@@ -11,9 +11,64 @@
   z-index: 9999;
 }
 
+a {
+  color: white;
+  background-color: rgba($color: #00115c, $alpha: 0.6);
+  text-decoration: none;
+  padding: 1rem 0.7rem;
+  transition: all 0.3s ease-in-out;
+  text-align: center;
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgba($color: #000000, $alpha: 1);
+  }
+}
+
 #drawer {
-  z-index: 1000;
-  padding-top: 3.2rem;
+  padding-top: 2rem;
+
+  #drawer-content {
+    height: 90%;
+    z-index: 1000;
+    padding-top: 3.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 2rem;
+    background-color: rgba($color: #000000, $alpha: 0.8);
+
+    #drawer-links {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.2rem;
+      width: 100%;
+    }
+
+    #drawer-actions {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 0.2rem;
+      width: 100%;
+
+      a {
+        width: 100%;
+        text-align: center;
+        padding: 1rem 1rem;
+        border-radius: 0.5rem;
+        background-color: rgba($color: #4300fcc4, $alpha: 0.8);
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+          cursor: pointer;
+          background-color: rgba($color: #000000, $alpha: 1);
+        }
+      }
+    }
+  }
 }
 
 #main {
@@ -43,7 +98,6 @@
 }
 
 @media screen and (max-width: 768px) {
-
   mat-drawer {
     z-index: 1000;
     padding-top: 3.2rem;

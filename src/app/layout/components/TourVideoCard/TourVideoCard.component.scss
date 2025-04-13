@@ -39,8 +39,15 @@
     margin-bottom: 1rem;
   }
 
-  button {
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
+  .card-bottom{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.5rem;
+
+    button {
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+    }
   }
 }

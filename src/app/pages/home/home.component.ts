@@ -5,7 +5,6 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { TourVideo } from '../../core/models/TourVideo';
 import { TourVideoService } from '../../core/providers/tour-video/tour-video.service';
 import { TourVideoCardComponent } from '../../layout/components/TourVideoCard/TourVideoCard.component';
 import { MatIconModule } from '@angular/material/icon';
@@ -18,6 +17,8 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class HomeComponent implements OnInit {
   constructor(readonly tvService: TourVideoService) {}
+
+  now = new Date();
 
   ngOnInit() {}
 

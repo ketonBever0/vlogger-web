@@ -6,6 +6,7 @@ export interface TourVideo {
   videoUrl: string;
   createdAt: Date;
   updatedAt: Date;
+  views: number;
   tourId: number;
   userId: number;
 }

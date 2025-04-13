@@ -1,59 +1,66 @@
-# VloggerWeb
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.7.
+# Projekt: Turista Vlogger
 
-## Development server
+## Fejlesztői szerver
 
-To start a local development server, run:
+1. Telepíts NodeJS-t és Angular CLI-t (`npm i -g @angular/cli`) a gépre.
 
-```bash
-ng serve
-```
+2. Tedd be az `environment.ts`-t az `src` mappába.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+3. Nyiss terminált, esetleg fejlesztői környezetet a projekt gyökerében.
 
-## Code scaffolding
+4. Telepítsd a csomagokat: `npm  i`
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+5. Indítsd el: `ng  serve`
 
-```bash
-ng generate component component-name
-```
+6. Nyisd meg az oldalt: `http://localhost:4200`
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Már működik a regisztráció és bejelentkezés. Egyik fiók e-mail címe: <testuser1@example.me>, jelszava: 123QWE#asd.
 
-```bash
-ng generate --help
-```
+## Átalakítók (Pipe-ok)
 
-## Building
+- **formatViewCount**: Nézettség kiírása. (0, 1 vagy több)
 
-To build the project run:
+## Direktívák
 
-```bash
-ng build
-```
+- **openProfileMenu**: Ha be vagy lépve, és ráviszed az egeret a profilképre, megnyílik a profil menü, és nyitva is marad, amíg az egér a menün van.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+- **addView**: A minta videókon megnyomott "Watch Now" gomb hatására növelhető a nézettség szám (és tesztelhető a formatViewCount pipe).
 
-## Running unit tests
+## Szolgáltatók
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- **authService**: Autentikációval kapcsolatos műveletek, lekérdezések.
 
-```bash
-ng test
-```
+- **tourVideoService**: Egyelőre minta adatokat szolgál, később Firestore lesz.
 
-## Running end-to-end tests
+## Material elemek
 
-For end-to-end (e2e) testing, run:
+- Töltőképernyő közepén spinner
 
-```bash
-ng e2e
-```
+- Drawer mobilnézetben
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+- Elválasztó a drawer linkek között
 
-## Additional Resources
+- Ikonok a navigációs sávon:
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Ajánlólink mellett (középen utolsó)
+
+- Mobilnézet esetén a drawer kapcsoló
+
+- Tooltip az említett ajánlólinken, ha ráviszed az egeret
+
+- Gombok több helyen
+
+- Input mezők Bejelentkezés és Regisztráció oldalon
+
+- Kártyanézet a videóknak
+
+- Videó címnél egy badge, ha 1 napnál újabb (a második elem mindig új lesz)
+
+- Snackbar üzenetek
+
+## Adatmodellek
+
+- Felhasználó
+
+- Nyaralás videó

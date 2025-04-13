@@ -11,12 +11,9 @@ import { MatInputModule } from '@angular/material/input';
 import { NgIf } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Firestore } from '@angular/fire/firestore';
-import { FirebaseError } from 'firebase/app';
-import { Auth, createUserWithEmailAndPassword } from '@angular/fire/auth';
-import { addDoc, collection } from 'firebase/firestore';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../core/providers/auth/auth.service';
 
 @Component({
   imports: [
@@ -31,11 +28,13 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
   signupForm: FormGroup;
 
   constructor(
-    private readonly formBuilder: FormBuilder // private readonly authService: AngularFireAuth,
+    private readonly formBuilder: FormBuilder,
+    private readonly authService: AuthService,
+    private readonly router: Router
   ) {
     this.signupForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -84,44 +83,30 @@ export class RegisterComponent implements OnInit {
   submitError = false;
   private snackBar = inject(MatSnackBar);
 
-  auth: Auth = inject(Auth);
-  firestore: Firestore = inject(Firestore);
-
   async onSubmit() {
-    if (this.signupForm.valid) {
-      const { email, password } = this.signupForm.value;
-
-      await createUserWithEmailAndPassword(this.auth, email, password)
-        .then((userCredential) => {
-          // Signed in
-          const user = userCredential.user;
-          console.log('User registered successfully:', user);
-
-          if (userCredential)
-            addDoc(collection(this.firestore, 'users'), {
-              id: userCredential.user?.uid,
-              email: userCredential.user?.email,
-              fullname: this.signupForm.value.fullname,
-              mobile: 'nope',
-              createdAt: new Date(),
-              updatedAt: new Date(),
-              role: 'user',
-            });
-        })
-        .catch((error: FirebaseError) => {
-          console.error('Error registering user:', error);
-        });
-    } else {
-      this.submitError = true;
-      // Optionally, you can mark all fields as touched to show validation errors
-      Object.keys(this.signupForm.controls).forEach((field) => {
-        const control = this.signupForm.get(field);
-        if (control) {
-          control.markAsTouched();
-        }
+    if (!this.signupForm.valid) {
+      this.snackBar.open('You did not provide all required data.', '', {
+        duration: 3000,
       });
+      return;
     }
-  }
 
-  ngOnInit(): void {}
+    if (
+      this.signupForm.value.password != this.signupForm.value.confirmPassword
+    ) {
+      this.snackBar.open('Password and Confirm Password must match.', '', {
+        duration: 3000,
+      });
+      return;
+    }
+
+    const error = await this.authService.register(this.signupForm);
+    if (error) this.snackBar.open(error, '', { duration: 3000 });
+    else {
+      this.snackBar.open('Registration successful.', '', {
+        duration: 3000,
+      });
+      this.router.navigateByUrl('/signin');
+    };
+  }
 }

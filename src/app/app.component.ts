@@ -3,6 +3,7 @@ import {
   NavigationEnd,
   NavigationStart,
   Router,
+  RouterLink,
   RouterOutlet,
 } from '@angular/router';
 import { NavbarComponent } from './layout/navbar/navbar.component';
@@ -14,6 +15,8 @@ import {
 import { AuthService } from './core/providers/auth/auth.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgIf } from '@angular/common';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +29,9 @@ import { NgIf } from '@angular/common';
     MatDrawerContent,
     MatProgressSpinnerModule,
     NgIf,
+    RouterLink,
+    MatDividerModule,
+    MatIconModule
   ],
   providers: [AuthService],
   templateUrl: './app.component.html',
@@ -35,7 +41,7 @@ export class AppComponent implements OnInit {
   title = 'vlogger-web';
 
   isAppLoading = false;
-  constructor(private router: Router) {
+  constructor(private router: Router, protected readonly authService: AuthService) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         this.isAppLoading = true;
@@ -55,8 +61,11 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    const loadingScreen = document.getElementById('loading-screen');
     window.onload = () => {
-      document.getElementById('loading-screen')!.style.display = 'none';
+      if(loadingScreen) {
+        loadingScreen.style.display = 'none';
+      }
     };
   }
 }

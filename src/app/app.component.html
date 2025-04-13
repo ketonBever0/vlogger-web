@@ -1,10 +1,44 @@
 <div *ngIf="isAppLoading" id="loading-screen">
-  <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
+  <mat-progress-spinner
+    mode="indeterminate"
+    color="primary"
+  ></mat-progress-spinner>
 </div>
 <app-navbar (toggleDrawerEvent)="onToggleDrawer()" />
 <mat-drawer-container hasBackdrop="true">
-  <mat-drawer #drawer mode="over" position="end">
-    <div id="drawer">asd</div>
+  <mat-drawer #drawer mode="over" position="end" id="drawer">
+    <div id="drawer-content">
+      <div>Welcome!</div>
+      <div id="drawer-links">
+        <a routerLink="/" matTooltip="Főoldal" (click)="onToggleDrawer()">
+          Főoldal
+        </a>
+        <mat-divider></mat-divider>
+        <a routerLink="/about" matTooltip="Főoldal" (click)="onToggleDrawer()">
+          About
+        </a>
+        <mat-divider></mat-divider>
+        <a
+          routerLink="/blog"
+          matTooltip="(Ez egy készülőben lévő utazás szervező PWA projektem, ami még nincs hostolva.)"
+          (click)="onToggleDrawer()"
+          >Te is utaznál?
+          <mat-icon style="height: 0.9rem; font-size: smaller"
+            >open_in_new</mat-icon
+          ></a
+        >
+      </div>
+      <div id="drawer-actions">
+        @if(!this.authService.isAuthenticated) {
+        <a routerLink="/signin" mat-raised-button (click)="onToggleDrawer()"
+          >Belépés</a
+        >
+        <a routerLink="/signup" mat-flat-button (click)="onToggleDrawer()"
+          >Regisztráció</a
+        >
+        }
+      </div>
+    </div>
   </mat-drawer>
   <mat-drawer-content>
     <main id="main">

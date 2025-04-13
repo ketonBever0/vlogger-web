@@ -2,7 +2,7 @@
   <h2>Trending Now</h2>
   <div #videoReel id="video-reel">
     @for (tourVideo of tvService.tourVideos; track $index) {
-    <TourVideoCard [tourVideo]="tourVideo" />
+    <TourVideoCard [tourVideo]="tourVideo" [now]="this.now" />
     }
     <!-- <div id="right-arrow"><mat-icon>arrow_forward</mat-icon></div> -->
   </div>

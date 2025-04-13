@@ -1,6 +1,12 @@
 <mat-card class="video-card" matTooltip="{{ tourVideo.description }}">
   <mat-card-content>
-    <h3>{{ tourVideo.title }}</h3>
+    <h3
+      matBadge="New!"
+      [matBadgeHidden]="now.getTime() - tourVideo.createdAt.getTime() > 86400000"
+      matBadgeColor="primary"
+    >
+      {{ tourVideo.title }}
+    </h3>
     <img
       src="{{ tourVideo.thumbnail }}"
       alt="{{ tourVideo.title }}"
@@ -8,9 +14,14 @@
     />
   </mat-card-content>
   <mat-card-subtitle>
-    <p>{{ tourVideo.updatedAt }}</p>
+    <p>{{ tourVideo.createdAt | date:'YYYY. MM. dd. HH:mm' }}</p>
   </mat-card-subtitle>
-  <mat-card-actions>
-    <button mat-button color="primary">Watch Now</button>
+  <mat-card-actions class="card-bottom">
+    <button mat-stroked-button color="primary"
+    addView
+    (view)="onView(tourVideo.id)"
+    (viewsChange)="onViewsChange($event)"
+    >Watch Now</button>
+    <sub>{{ tourVideo.views | formatViewCount }}</sub>
   </mat-card-actions>
 </mat-card>

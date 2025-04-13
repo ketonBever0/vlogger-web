@@ -14,10 +14,28 @@
     >
   </div>
   <div id="side-actions">
-    <div id="auth-links">
-      <a routerLink="/signin" mat-raised-button>Sign In</a>
-      <a routerLink="/signup" mat-flat-button>Sign Up</a>
+    @if(this.authService.isAuthenticated) {
+    <img
+      id="profile-pic"
+      src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
+      alt="profile picture"
+      openProfileMenu
+    />
+    <div id="profile-menu" openProfileMenu>
+      <h3 id="profile-menu-header">
+        Welcome {{ authService.userData?.fullname }}!
+      </h3>
+      <div id="profile-menu-links">
+        <a class="link" routerLink="profile">Profile</a>
+        <a class="link" (click)="logout()">Logout</a>
+      </div>
     </div>
+    } @else {
+    <div id="auth-links">
+      <a routerLink="/signin" mat-raised-button>Belépés</a>
+      <a routerLink="/signup" mat-flat-button>Regisztráció</a>
+    </div>
+    }
     <button id="drawer-btn" mat-icon-button (click)="toggleDrawer()">
       <mat-icon>menu</mat-icon>
     </button>
