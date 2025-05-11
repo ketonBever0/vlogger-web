@@ -14,6 +14,8 @@
     overflow-x: scroll;
     scrollbar-width: none; /* For Firefox */
     -ms-overflow-style: none; /* For Internet Explorer and Edge */
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
 
     &::-webkit-scrollbar {
       display: none; /* For Chrome, Safari, and Opera */

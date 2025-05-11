@@ -15,13 +15,32 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrls: ['./home.component.scss'],
   imports: [MatIconModule, TourVideoCardComponent],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
   constructor(readonly tvService: TourVideoService) {}
 
   now = new Date();
 
   ngOnInit() {
-    // this.tvService.addTemplateVideos();
+    this.tvService.getTourVideos();
+  }
+
+  @ViewChild('videoReel') videoReel!: ElementRef;
+  startX = 0;
+  scrollLeft = 0;
+
+  ngAfterViewInit() {
+      const reel: HTMLElement = this.videoReel.nativeElement;
+
+      reel.addEventListener('touchstart', (e: TouchEvent) => {
+        this.startX = e.touches[0].pageX - reel.offsetLeft;
+        this.scrollLeft = reel.scrollLeft;
+      })
+      
+      reel.addEventListener('touchmove', (e: TouchEvent) => {
+        const x = e.touches[0].pageX - reel.offsetLeft;
+        const walk = (x - this.startX) * 2;
+        reel.scrollLeft = this.scrollLeft - walk;
+      })
   }
 
   // @ViewChild('videoReel') videoReel!: ElementRef;

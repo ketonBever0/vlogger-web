@@ -2,7 +2,7 @@
   <mat-card-content>
     <h3
       matBadge="New!"
-      [matBadgeHidden]="now.getTime() - tourVideo.createdAt.getTime() > 86400000"
+      [matBadgeHidden]="now.getTime() - tourVideo.createdAt.toDate().getTime() > 86400000"
       matBadgeColor="primary"
     >
       {{ tourVideo.title }}
@@ -14,7 +14,7 @@
     />
   </mat-card-content>
   <mat-card-subtitle>
-    <p>{{ tourVideo.createdAt | date:'YYYY. MM. dd. HH:mm' }}</p>
+    <p>{{ tourVideo.createdAt.toDate() | date:'YYYY. MM. dd. HH:mm' }}</p>
   </mat-card-subtitle>
   <mat-card-actions class="card-bottom">
     <button mat-stroked-button color="primary"
