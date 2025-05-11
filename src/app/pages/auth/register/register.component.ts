@@ -13,7 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../core/providers/auth/auth.service';
+import { AuthService } from '../../../core/services/auth/auth.service';
 
 @Component({
   imports: [

@@ -1,0 +1,62 @@
+:host {
+  display: block;
+}
+
+#container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+
+  #top {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+
+    #left {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+
+      #profile-pic {
+        height: 5rem;
+        width: 5rem;
+        border-radius: 25rem;
+        margin: auto;
+      }
+    }
+
+    #right {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 4rem;
+
+      #data-table {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1rem;
+
+        .row {
+          display: flex;
+          flex-direction: row;
+          gap: 2rem;
+
+          .name-col {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+
+  #description-container {
+    text-align: center;
+
+    #no-description {
+      color: gray;
+    }
+  }
+}

@@ -3,7 +3,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { AuthService } from '../../core/providers/auth/auth.service';
+import { AuthService } from '../../core/services/auth/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgIf } from '@angular/common';
 import { OpenProfileMenuDirective } from '../../core/directives/open-profile-menu.directive';

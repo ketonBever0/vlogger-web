@@ -15,6 +15,10 @@
   </div>
   <div id="side-actions">
     @if(this.authService.isAuthenticated) {
+    <a routerLink="create" id="create-btn" mat-fab extended>
+      <mat-icon>add</mat-icon>
+      Create
+    </a>
     <img
       id="profile-pic"
       src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
@@ -26,7 +30,7 @@
         Welcome {{ authService.userData?.fullname }}!
       </h3>
       <div id="profile-menu-links">
-        <a class="link" routerLink="profile">Profile</a>
+        <a class="link" routerLink="me">Profile</a>
         <a class="link" (click)="logout()">Logout</a>
       </div>
     </div>

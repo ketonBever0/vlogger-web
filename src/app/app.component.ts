@@ -12,7 +12,7 @@ import {
   MatDrawerContainer,
   MatDrawerContent,
 } from '@angular/material/sidenav';
-import { AuthService } from './core/providers/auth/auth.service';
+import { AuthService } from './core/services/auth/auth.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgIf } from '@angular/common';
 import { MatDividerModule } from '@angular/material/divider';
@@ -23,7 +23,6 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [
     RouterOutlet,
     NavbarComponent,
-    NavbarComponent,
     MatDrawer,
     MatDrawerContainer,
     MatDrawerContent,
@@ -31,9 +30,8 @@ import { MatIconModule } from '@angular/material/icon';
     NgIf,
     RouterLink,
     MatDividerModule,
-    MatIconModule
+    MatIconModule,
   ],
-  providers: [AuthService],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -41,7 +39,10 @@ export class AppComponent implements OnInit {
   title = 'vlogger-web';
 
   isAppLoading = false;
-  constructor(private router: Router, protected readonly authService: AuthService) {
+  constructor(
+    private router: Router,
+    protected readonly authService: AuthService
+  ) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         this.isAppLoading = true;
@@ -63,7 +64,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     const loadingScreen = document.getElementById('loading-screen');
     window.onload = () => {
-      if(loadingScreen) {
+      if (loadingScreen) {
         loadingScreen.style.display = 'none';
       }
     };

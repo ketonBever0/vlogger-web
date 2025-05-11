@@ -1,15 +1,28 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { TourVideo } from '../../models/TourVideo';
+import { StoreService } from '../store/store.service';
+import { deleteField, doc, setDoc } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TourVideoService {
-  constructor() {}
+  constructor(private readonly fStore: StoreService) {}
+
+  async addTemplateVideos() {
+    for (const video of this.tourVideos) {
+      const newVideo = video as any;
+      await setDoc(doc(this.fStore.db, 'videos', video.id), {
+        ...newVideo,
+        id: deleteField(),
+      }, {merge: true});
+      console.log('Video added:', video.id);
+    }
+  }
 
   tourVideos: TourVideo[] = [
     {
-      id: 1,
+      id: 'xZJGT3LcBcbgGqPr6VCk',
       title: 'Tour Video 1',
       description: 'Description for Tour Video 1',
       thumbnail: 'https://example.com/thumbnail1.jpg',
@@ -21,7 +34,7 @@ export class TourVideoService {
       views: 1,
     },
     {
-      id: 2,
+      id: 'UPwgvJRK1g4JbZyI99Ur',
       title: 'Tour Video 2',
       description: 'Description for Tour Video 2',
       thumbnail: 'https://example.com/thumbnail2.jpg',
@@ -33,7 +46,7 @@ export class TourVideoService {
       views: 0,
     },
     {
-      id: 3,
+      id: '3hsLoSHLbisMw5exf2wz',
       title: 'Tour Video 3',
       description: 'Description for Tour Video 3',
       thumbnail: 'https://example.com/thumbnail3.jpg',
@@ -45,7 +58,7 @@ export class TourVideoService {
       views: 0,
     },
     {
-      id: 4,
+      id: 'MLZMxDs9siuXXAbhEguj',
       title: 'Tour Video 4',
       description: 'Description for Tour Video 4',
       thumbnail: 'https://example.com/thumbnail4.jpg',
@@ -57,7 +70,7 @@ export class TourVideoService {
       views: 362,
     },
     {
-      id: 4,
+      id: 'KJatcSM4IsFFcv6O5SzT',
       title: 'Tour Video 5',
       description: 'Description for Tour Video 5',
       thumbnail: 'https://example.com/thumbnail5.jpg',

@@ -5,7 +5,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { TourVideoService } from '../../core/providers/tour-video/tour-video.service';
+import { TourVideoService } from '../../core/services/tour-video/tour-video.service';
 import { TourVideoCardComponent } from '../../layout/components/TourVideoCard/TourVideoCard.component';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -20,7 +20,9 @@ export class HomeComponent implements OnInit {
 
   now = new Date();
 
-  ngOnInit() {}
+  ngOnInit() {
+    // this.tvService.addTemplateVideos();
+  }
 
   // @ViewChild('videoReel') videoReel!: ElementRef;
   // ngAfterViewInit() {

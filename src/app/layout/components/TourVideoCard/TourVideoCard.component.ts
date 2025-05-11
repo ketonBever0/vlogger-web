@@ -28,8 +28,8 @@ export class TourVideoCardComponent implements OnInit {
 
   constructor() {}
 
-  onView(value: number) {
-    this.tourVideo.views += value;
+  onView() {
+    this.tourVideo.views += 1;
   }
 
   onViewsChange(value: number) {

@@ -1,0 +1,66 @@
+<div id="container">
+  <div id="top">
+    <div id="left">
+      <img
+        id="profile-pic"
+        src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
+        alt=""
+      />
+      <h2>{{ this.fAuth.userData?.fullname }}</h2>
+    </div>
+    <div id="right">
+      <div id="data-table">
+        <!-- EMAIL -->
+        <div class="row">
+          <span class="name-col">E-mail address</span>
+          <span class="data-col">{{ this.fAuth.userData?.email }}</span>
+        </div>
+        <mat-divider></mat-divider>
+        <!-- MOBILE -->
+        <div class="row">
+          <span class="name-col">Mobile number</span>
+          <span class="data-col">{{ this.fAuth.userData?.mobile }}</span>
+        </div>
+        <mat-divider></mat-divider>
+        <!-- LAST_UPDATE -->
+        <div class="row">
+          <span class="name-col">Last profile update</span>
+          <span class="data-col">{{
+            this.fAuth.userData?.updatedAt?.toDate()| date:"YYYY. MM. dd HH:mm:ss"
+          }}</span>
+        </div>
+      </div>
+      <!-- <button mat-flat-button>Szerkesztés</button> -->
+    </div>
+  </div>
+  <div id="description-container">
+    @if(!editDescription) { @if(this.fAuth.userData?.description != null &&
+    this.fAuth.userData?.description != '') {
+    <p id="description">{{ this.fAuth.userData?.description }}</p>
+    } @else {
+    <p id="no-description">-- No description --</p>
+    }
+    <button mat-flat-button (click)="setEditDesription()">Szerkesztés</button>
+    } @else {
+    <form [formGroup]="editDescriptionForm" (ngSubmit)="saveDescription()">
+      <div class="mat-input">
+        <mat-form-field>
+          <mat-label for="description">Description</mat-label>
+          <textarea
+            matInput
+            type="text"
+            id="description"
+            formControlName="description"
+          ></textarea>
+        </mat-form-field>
+      </div>
+      <div id="descriptionButtons">
+        <button mat-raised-button (click)="editDescription = false">
+          Mégse
+        </button>
+        <button mat-flat-button type="submit">Mentés</button>
+      </div>
+    </form>
+    }
+  </div>
+</div>
