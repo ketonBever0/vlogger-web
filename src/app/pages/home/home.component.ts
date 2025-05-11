@@ -25,38 +25,40 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   @ViewChild('videoReel') videoReel!: ElementRef;
+  isDown = false;
   startX = 0;
   scrollLeft = 0;
 
   ngAfterViewInit() {
-      const reel: HTMLElement = this.videoReel.nativeElement;
+    const reel = this.videoReel.nativeElement;
 
-      reel.addEventListener('touchstart', (e: TouchEvent) => {
-        this.startX = e.touches[0].pageX - reel.offsetLeft;
-        this.scrollLeft = reel.scrollLeft;
-      })
-      
-      reel.addEventListener('touchmove', (e: TouchEvent) => {
-        const x = e.touches[0].pageX - reel.offsetLeft;
-        const walk = (x - this.startX) * 2;
-        reel.scrollLeft = this.scrollLeft - walk;
-      })
+    reel.addEventListener('mousedown', (e: MouseEvent) => this.startDrag(e));
+    reel.addEventListener('mouseleave', () => this.endDrag());
+    reel.addEventListener('mouseup', () => this.endDrag());
+    reel.addEventListener('mousemove', (e: MouseEvent) => this.drag(e));
+
+    reel.addEventListener('touchstart', (e: TouchEvent) => this.startDrag(e.touches[0]));
+    reel.addEventListener('touchend', () => this.endDrag());
+    reel.addEventListener('touchmove', (e: TouchEvent) => this.drag(e.touches[0]));
   }
 
-  // @ViewChild('videoReel') videoReel!: ElementRef;
-  // ngAfterViewInit() {
-  //   this.videoReel.nativeElement.addEventListener('scroll', () => {
-  //     const scrollLeft = this.videoReel.nativeElement.scrollLeft;
-  //     const scrollWidth = this.videoReel.nativeElement.scrollWidth;
-  //     const clientWidth = this.videoReel.nativeElement.clientWidth;
+  startDrag(e: MouseEvent | Touch) {
+    this.isDown = true;
+    this.startX = e.pageX - this.videoReel.nativeElement.offsetLeft;
+    this.scrollLeft = this.videoReel.nativeElement.scrollLeft;
+  }
 
-  //     if (scrollLeft + clientWidth >= scrollWidth) {
-  //       // TODO: Load more videos
-  //       this.videoReel.nativeElement.classList.add('at-start');
-  //     }
-  //     if (scrollLeft === 0) {
-  //       this.videoReel.nativeElement.classList.add('at-end');
-  //     }
-  //   });
-  // }
+  endDrag() {
+    this.isDown = false;
+  }
+
+  drag(e: MouseEvent | Touch) {
+    if (!this.isDown) return;
+    if ('preventDefault' in e) {
+      e.preventDefault();
+    }
+    const x = e.pageX - this.videoReel.nativeElement.offsetLeft;
+    const walk = (x - this.startX) * 1.5;
+    this.videoReel.nativeElement.scrollLeft = this.scrollLeft - walk;
+  }
 }

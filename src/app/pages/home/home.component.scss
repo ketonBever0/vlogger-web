@@ -12,13 +12,12 @@
     // width: 50%;
     overflow-y: auto;
     overflow-x: scroll;
-    scrollbar-width: none; /* For Firefox */
-    -ms-overflow-style: none; /* For Internet Explorer and Edge */
-    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     -webkit-overflow-scrolling: touch;
 
     &::-webkit-scrollbar {
-      display: none; /* For Chrome, Safari, and Opera */
+      display: none;
     }
 
     padding: 0.3rem 0.5rem;
