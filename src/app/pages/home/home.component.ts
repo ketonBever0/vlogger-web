@@ -25,6 +25,6 @@ export class HomeComponent implements OnInit {
   now = new Date();
 
   ngOnInit() {
-    this.tvService.getTourVideos();
+    this.tvService.getTrendingVideos();
   }
 }

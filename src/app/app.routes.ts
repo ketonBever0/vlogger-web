@@ -34,6 +34,14 @@ export const routes: Routes = [
         (m) => m.VideoUploadModule
       ),
   },
+  {
+    path: 'my-videos',
+    loadChildren: () =>
+      import('@app/pages/my-videos/my-videos.module').then(
+        (m) => m.MyVideosModule
+      ),
+  },
+
   { path: 'signin', pathMatch: 'full', component: LoginComponent },
   { path: 'signup', pathMatch: 'full', component: RegisterComponent },
 

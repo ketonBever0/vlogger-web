@@ -6,7 +6,6 @@
     #videoReel
     id="video-reel"
   >
-  <!-- TODO: Nem kattintható így a gomb -->
     @for (tourVideo of tvService.tourVideos; track $index) {
     <TourVideoCard [tourVideo]="tourVideo" [now]="this.now" />
     }
