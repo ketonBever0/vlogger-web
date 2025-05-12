@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import OnUserDataFetch from '@app/core/hooks/OnUserDataFetch';
 import { TourVideo } from '@app/core/models/TourVideo';
 import { AuthService } from '@app/core/services/auth/auth.service';
 import { TourVideoService } from '@app/core/services/tour-video/tour-video.service';
@@ -9,7 +15,7 @@ import { TourVideoService } from '@app/core/services/tour-video/tour-video.servi
   styleUrls: ['./my-videos.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MyVideosComponent implements OnInit {
+export class MyVideosComponent implements OnInit, OnUserDataFetch, OnDestroy {
   constructor(
     private readonly tv: TourVideoService,
     private readonly fAuth: AuthService
@@ -18,8 +24,15 @@ export class MyVideosComponent implements OnInit {
   myVideos: TourVideo[] = [];
 
   async ngOnInit() {
-    if (this.fAuth.userData?.id)
-      this.myVideos = await this.tv.getMyVideos(this.fAuth.userData!.id);
-    console.log(this.myVideos);
+    this.fAuth.registerOnUserDataFetchHandler(this);
+  }
+
+  ngOnDestroy() {
+    this.fAuth.unregisterOnUserDataFetchHandler(this);
+  }
+
+  async onUserDataFetch() {
+    console.log(this.fAuth.userData?.id);
+    this.myVideos = await this.tv.getMyVideos(this.fAuth.userData!.id);
   }
 }

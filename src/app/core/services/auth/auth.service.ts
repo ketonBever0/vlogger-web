@@ -11,13 +11,14 @@ import { User } from '../../models/User';
 import { FormGroup } from '@angular/forms';
 import { StoreService } from '../store/store.service';
 import { distinctUntilChanged, Subscription } from 'rxjs';
+import OnUserDataFetch from '@app/core/hooks/OnUserDataFetch';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService implements OnDestroy {
   constructor(
-    public readonly fAuth: Auth,
+    private readonly fAuth: Auth,
     private readonly fStore: StoreService
   ) {
     this.getAuthState();
@@ -28,6 +29,24 @@ export class AuthService implements OnDestroy {
 
   private authSubscription?: Subscription;
   private userDocUnsubscribe?: () => void;
+
+  private onUserDataFetchHandlers: OnUserDataFetch[] = [];
+
+  registerOnUserDataFetchHandler(handler: OnUserDataFetch) {
+    this.onUserDataFetchHandlers.push(handler);
+  }
+
+  unregisterOnUserDataFetchHandler(handler: OnUserDataFetch) {
+    this.onUserDataFetchHandlers = this.onUserDataFetchHandlers.filter(
+      (h) => h !== handler
+    );
+  }
+
+  private onUserDataFetched() {
+    this.onUserDataFetchHandlers.forEach((handler) =>
+      handler.onUserDataFetch()
+    );
+  }
 
   getAuthState() {
     this.authSubscription = authState(this.fAuth)
@@ -52,6 +71,7 @@ export class AuthService implements OnDestroy {
                 ...this.userData,
                 ...docSnap.data(),
               } as User;
+              this.onUserDataFetched();
             }
           });
         } else {
