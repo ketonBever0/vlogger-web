@@ -1,3 +1,9 @@
-<p>
-  my-videos works!
-</p>
+<div id="container">
+  <div id="videos">
+    @for (video of this.tv.tourVideos; track $index) {
+    <mat-card appearance="outlined">
+      <mat-card-content>{{ video.title }}</mat-card-content>
+    </mat-card>
+    }
+  </div>
+</div>

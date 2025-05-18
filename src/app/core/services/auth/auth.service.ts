@@ -17,7 +17,7 @@ import { distinctUntilChanged, Subscription } from 'rxjs';
 })
 export class AuthService implements OnDestroy {
   constructor(
-    public readonly fAuth: Auth,
+    private readonly fAuth: Auth,
     private readonly fStore: StoreService
   ) {
     this.getAuthState();
