@@ -6,7 +6,7 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
 } from 'firebase/auth';
-import { doc, getDoc, onSnapshot, setDoc } from '@angular/fire/firestore';
+import { doc, getDoc, onSnapshot, setDoc, updateDoc } from '@angular/fire/firestore';
 import { User } from '../../models/User';
 import { FormGroup } from '@angular/forms';
 import { StoreService } from '../store/store.service';
@@ -115,5 +115,12 @@ export class AuthService implements OnDestroy {
       // console.error('Logout error:', error);
       return false;
     }
+  }
+
+  async saveDescription(value: string) {
+    await updateDoc(doc(this.fStore.db, 'users', this.userData!.id), {
+      description: value,
+      updatedAt: new Date(),
+    });
   }
 }

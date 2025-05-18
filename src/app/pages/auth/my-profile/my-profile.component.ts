@@ -1,10 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AuthService } from '../../../core/services/auth/auth.service';
 import { StoreService } from '../../../core/services/store/store.service';
-import { doc, updateDoc } from '@angular/fire/firestore';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { DatePipe } from '@angular/common';
@@ -43,10 +42,9 @@ export class MyProfileComponent {
   }
 
   async saveDescription() {
-    await updateDoc(doc(this.fStore.db, 'users', this.fAuth.userData!.id), {
-      description: this.editDescriptionForm.value.description,
-      updatedAt: new Date(),
-    });
+    await this.fAuth.saveDescription(
+      this.editDescriptionForm.value.description
+    );
     this.editDescription = false;
   }
 }
